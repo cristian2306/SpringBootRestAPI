@@ -1,5 +1,7 @@
 package edu.eci.escuelaing.ieti.userapi.service;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import edu.eci.escuelaing.ieti.userapi.entities.User;
@@ -39,4 +41,8 @@ public interface UserService
      * @return
      */
     User update( User user, String userId );
+
+    List<User> findUsersWithNameOrLastNameLike(String name, String LastName);
+    
+    List<User> findUsersCreatedAfter(Date startDate);
 }  

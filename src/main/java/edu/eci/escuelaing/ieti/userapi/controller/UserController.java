@@ -1,11 +1,15 @@
 package edu.eci.escuelaing.ieti.userapi.controller;
 
 import java.lang.reflect.Array;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -73,6 +77,17 @@ public class UserController {
             return new ResponseEntity<>(false,HttpStatus.NOT_MODIFIED);
         }
     
+    }
+
+    @GetMapping("/{name}/{lastName}")
+    public ResponseEntity<List<User>> findUsersWithNameOrLastNameLike(@PathVariable String name,String lastName){
+        System.out.printf("Buscando por nombre: %s y apellido:%s%n",name,lastName);
+        return new ResponseEntity<List<User>>(userService.findUsersWithNameOrLastNameLike(name, lastName), HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/date/after/{date}")
+    public ResponseEntity<List<User>> findUsersCreatedAfter(@PathVariable @DateTimeFormat(iso=ISO.DATE) Date date){
+        return new ResponseEntity<List<User>>(userService.findUsersCreatedAfter(date),HttpStatus.ACCEPTED);
     }
 }
     

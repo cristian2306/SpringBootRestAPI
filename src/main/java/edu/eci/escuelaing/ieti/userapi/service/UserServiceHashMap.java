@@ -1,6 +1,8 @@
 package edu.eci.escuelaing.ieti.userapi.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -8,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import edu.eci.escuelaing.ieti.userapi.entities.User;
 
-@Service
 public class UserServiceHashMap implements UserService {
 
     private HashMap<String,User> users;
@@ -53,6 +54,18 @@ public class UserServiceHashMap implements UserService {
         }else{
             return old;
         }
+    }
+
+    @Override
+    public List<User> findUsersWithNameOrLastNameLike(String name, String LastName) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public List<User> findUsersCreatedAfter(Date startDate) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 

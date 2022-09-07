@@ -1,12 +1,24 @@
 package edu.eci.escuelaing.ieti.userapi.entities;
 
+import java.time.LocalDate;
+import java.util.Date;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class User {
 
+    @Id
     private String id;
+
     private String name;
+
+    @Indexed( unique = true)
     private String email;
     private String lastName;
-    private String createdAt;
+    private Date createdAt;
 
     public User() {
     }
@@ -43,11 +55,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
