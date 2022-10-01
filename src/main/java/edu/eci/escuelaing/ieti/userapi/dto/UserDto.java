@@ -1,14 +1,26 @@
 package edu.eci.escuelaing.ieti.userapi.dto;
 
+import java.util.Date;
+
 public class UserDto {
 
     private String id;
     private String name;
     private String email;
     private String lastName;
-    private String createdAt;
+    private Date createdAt;
+    private String password;
+
 
     public UserDto() {
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getId() {
@@ -43,11 +55,11 @@ public class UserDto {
         this.lastName = lastName;
     }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 

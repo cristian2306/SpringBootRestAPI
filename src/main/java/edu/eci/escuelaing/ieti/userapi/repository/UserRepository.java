@@ -13,4 +13,6 @@ import edu.eci.escuelaing.ieti.userapi.entities.User;
     
     List<User> findByCreatedAtAfter(Date startDate);
 
+    User findByEmail(String email);
+
   }

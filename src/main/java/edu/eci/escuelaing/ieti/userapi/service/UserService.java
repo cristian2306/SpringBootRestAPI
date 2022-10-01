@@ -21,6 +21,8 @@ public interface UserService
      * @return
      */
     User findById( String id );
+
+    User findByEmail(String mail);
     
     /**
      * Obtiene todos los usuarios registrados
@@ -33,6 +35,7 @@ public interface UserService
      * @param id Id del usuario a eliminar
      */
     void deleteById( String id );
+
 
     /**
      * Actializa el usuario dado su id

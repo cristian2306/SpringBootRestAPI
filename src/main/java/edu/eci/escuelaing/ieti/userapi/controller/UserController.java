@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
+
+import javax.annotation.security.RolesAllowed;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,15 +52,19 @@ public class UserController {
    
     @GetMapping( "/{id}" )
     public ResponseEntity<UserDto> findById( @PathVariable String id ) {
-       User user = userService.findById(id);
-       UserDto userDto = modelMapper.map(user,UserDto.class);
-       return new ResponseEntity<>(userDto,HttpStatus.ACCEPTED);
+        try{
+            User user = userService.findById(id);
+            UserDto userDto = modelMapper.map(user,UserDto.class);
+            return new ResponseEntity<>(userDto,HttpStatus.ACCEPTED);
+        }catch(NoSuchElementException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
    
    
     @PostMapping
     public ResponseEntity<UserDto> create( @RequestBody UserDto userDto ) {
-        userService.create(modelMapper.map(userDto, User.class));
+        userService.create(new User(userDto));
         UserDto userDto2 = modelMapper.map(userService.findById(userDto.getId()),UserDto.class);
         return new ResponseEntity<>(userDto2,HttpStatus.ACCEPTED);
     }
@@ -68,13 +75,18 @@ public class UserController {
         return new ResponseEntity<>(modelMapper.map(newUser,UserDto.class),HttpStatus.ACCEPTED);
     }
    
+    @RolesAllowed("ADMIN")
     @DeleteMapping( "/{id}" )
     public ResponseEntity<Boolean> delete( @PathVariable String id ) {
         userService.deleteById(id);
-        if(userService.findById(id) == null){
-            return new ResponseEntity<Boolean>(true, HttpStatus.ACCEPTED);
-        }else{
-            return new ResponseEntity<>(false,HttpStatus.NOT_MODIFIED);
+        try{
+            if(userService.findById(id) == null){
+                return new ResponseEntity<Boolean>(true, HttpStatus.ACCEPTED);
+            }else{
+                return new ResponseEntity<>(false,HttpStatus.NOT_MODIFIED);
+            }
+        }catch(NoSuchElementException e){
+            return new ResponseEntity<Boolean>(true,HttpStatus.ACCEPTED);
         }
     
     }

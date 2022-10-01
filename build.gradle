@@ -13,10 +13,23 @@ repositories {
 }
 
 dependencies {
-	implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.1.0'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.modelmapper:modelmapper:3.1.0'
+	//For JWT
+	implementation 'javax.ws.rs:javax.ws.rs-api:2.1.1'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.security:spring-security-crypto'
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+	//Fix error!!! u,u
+	implementation 'javax.ws.rs:javax.ws.rs-api'
+	implementation 'javax.xml.bind:jaxb-api'
+
+	implementation "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2"
+    implementation "org.glassfish.jaxb:jaxb-runtime:2.3.2"
+
+	
 }
 
 tasks.named('test') {

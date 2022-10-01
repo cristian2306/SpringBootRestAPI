@@ -68,6 +68,12 @@ public class UserServiceHashMap implements UserService {
         return null;
     }
 
+    @Override
+    public User findByEmail(String mail) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 
     
 }
